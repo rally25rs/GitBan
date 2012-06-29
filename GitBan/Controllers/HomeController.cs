@@ -12,5 +12,10 @@ namespace GitBan.Controllers
         {
             return View();
         }
+
+        public ActionResult Board()
+        {
+            return View();
+        }
     }
 }
