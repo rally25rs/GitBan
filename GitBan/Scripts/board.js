@@ -9,13 +9,7 @@ function Column(name, wip) {
     self.name = new ko.observable(name);
     self.wip = new ko.observable(wip);
     self.cards = new ko.observableArray([
-        new Card("Card One", "Jeff"),
-        new Card("Card Two", "Jeff")
     ]);
-}
-
-function Board() {
-    var self = this;
 }
 
 var viewModel = {
@@ -24,21 +18,13 @@ var viewModel = {
         new Column("Planning", "2")
     ]),
     isColumnFull: function (parent) {
-        return parent().length < 3;
+        return true;
     }
 };
 
-function findPos(obj) {
-    var curleft = curtop = 0;
-    if (obj.offsetParent) {
-        do {
-            curleft += obj.offsetLeft;
-            curtop += obj.offsetTop;
-        } while (obj = obj.offsetParent);
-    }
-    return [curleft, curtop];
-}
-
 $(function () {
-    ko.applyBindings(viewModel);
+    $.getJSON("https://api.github.com/repos/rally25rs/npp-DotNetScripting/issues", function (data) {
+        viewModel.columns()[0].cards = ko.mapping.fromJS(data);
+        ko.applyBindings(viewModel);
+    });
 });

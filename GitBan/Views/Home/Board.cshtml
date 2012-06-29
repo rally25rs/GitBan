@@ -12,6 +12,7 @@
     <script src="@Url.Content("/Scripts/jquery-1.6.2.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/knockout-2.1.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/knockout-sortable.js")" type="text/javascript"></script>
     <script src="@Url.Content("/Scripts/board.js")" type="text/javascript"></script>
 }
@@ -19,7 +20,7 @@
 <div id="board" data-bind="foreach: columns"><div class="column">
     <div class="column-head"><span data-bind="text: name"></span> (<span data-bind="text: cards().length"></span>/<span data-bind="text: wip"></span>)</div>
     <div class="column-content" data-bind="sortable: { data: cards, allowDrop: $root.isColumnFull }">
-        <div class="card"><span data-bind="text: txt"></span><br/>
+        <div class="card"><span data-bind="text: body"></span><br/>
             (<span data-bind="text: $parent.name"></span>)</div>
     </div>
 </div></div>

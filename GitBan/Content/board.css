@@ -3,7 +3,7 @@
 #board { display: block; position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; border: 1px solif #f0f; margin: 0; }
 
 .column { float: left; display: block; height: 100%; border: 1px solid #000; width: 49%; display: inline-block; }
-.column-content { display: block; margin: 0; padding: 10px; border-bottom: 1px dashed #bbb; }
+.column-content { display: block; margin: 0; padding: 10px; border-bottom: 1px dashed #bbb; height: 100%; }
 .column-head { border-bottom: 1px solid #000; padding: 5px; background: #bbb; }
 
 .card { display: block; background: #ff6; border: 1px solid #000; padding: 5px; margin: 5px; width: 90%; height: 100px; z-index: 99; }
