@@ -9,6 +9,9 @@ function Column(name, wip) {
     self.name = new ko.observable(name);
     self.wip = new ko.observable(wip);
     self.cards = new ko.observableArray([]);
+    self.isColumnFull = function() {
+        return self.cards().length < self.wip();
+    };
 }
 
 var viewModel = {
