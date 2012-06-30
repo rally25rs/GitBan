@@ -1,9 +1,25 @@
 ﻿body { width: 100%; height: 100%; margin: 0; padding: 0; }
 
-#board { display: block; position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; border: 1px solif #f0f; margin: 0; }
+#board { display: block; position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; margin: 0; }
 
-.column { float: left; display: block; height: 100%; border: 1px solid #000; width: 49%; display: inline-block; }
+.column { float: left; display: block; height: 100%; border: 1px solid #000; width: 49%; display: inline-block; background: #FFFFFF; }
 .column-content { display: block; margin: 0; padding: 10px; border-bottom: 1px dashed #bbb; height: 100%; }
 .column-head { border-bottom: 1px solid #000; padding: 5px; background: #bbb; }
 
-.card { display: block; background: #ff6; border: 1px solid #000; padding: 5px; margin: 5px; width: 90%; height: 100px; z-index: 99; }
+.card { display: block; background: #FFFFBB; border: 1px solid #000; padding: 5px; margin: 5px; width: 90%; height: auto; z-index: 99; cursor: move; }
+.card .number { display: inline-block; width: 30px; color: #888888; }
+.card .title { font-size: 13px; font-weight: bold; margin: 0 25px 3px 0; padding: 0; }
+.card .label {
+    border-radius: 2px 2px 2px 2px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 1px 4px;
+    text-decoration: none;
+    color: #FFFFFF;
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);
+    fill: #555555;
+    mso-panose-stroke-variation: none;
+    border: 0 none;
+    margin: 0;
+}

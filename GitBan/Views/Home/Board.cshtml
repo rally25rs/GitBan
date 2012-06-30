@@ -18,9 +18,14 @@
 }
 
 <div id="board" data-bind="foreach: columns"><div class="column">
-    <div class="column-head"><span data-bind="text: name"></span> (<span data-bind="text: cards().length"></span>/<span data-bind="text: wip"></span>)</div>
+    <div class="column-head"><span data-bind="text: name"></span> <span data-bind="style: { color:  cards().length > wip() ? '#FF0000' : '#000000' }">(<span data-bind="text: cards().length"></span>/<span data-bind="text: wip"></span>)</span></div>
     <div class="column-content" data-bind="sortable: { data: cards, allowDrop: $root.isColumnFull }">
-        <div class="card"><span data-bind="text: body"></span><br/>
-            (<span data-bind="text: $parent.name"></span>)</div>
+        <div class="card">
+            <span class="number" data-bind="text: '#' + number()"></span>
+            <span class="title" data-bind="text: title"></span>
+            <span data-bind="foreach: labels">
+                <span class="label" data-bind="text: name, style: { background: '#' + color() }"></span>
+            </span>
+        </div>
     </div>
 </div></div>

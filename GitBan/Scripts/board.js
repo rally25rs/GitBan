@@ -8,23 +8,23 @@ function Column(name, wip) {
     var self = this;
     self.name = new ko.observable(name);
     self.wip = new ko.observable(wip);
-    self.cards = new ko.observableArray([
-    ]);
+    self.cards = new ko.observableArray([]);
 }
 
 var viewModel = {
     columns: new ko.observableArray([
         new Column("Backlog", "5"),
         new Column("Planning", "2")
-    ]),
-    isColumnFull: function (parent) {
-        return true;
-    }
+    ])
 };
 
 $(function () {
-    $.getJSON("https://api.github.com/repos/rally25rs/npp-DotNetScripting/issues", function (data) {
-        viewModel.columns()[0].cards = ko.mapping.fromJS(data);
-        ko.applyBindings(viewModel);
+    ko.applyBindings(viewModel);
+
+    $.getJSON("https://api.github.com/repos/rally25rs/npp-DotNetScripting/issues?callback=?", null, function (response) {
+        viewModel.columns()[0].cards.removeAll();
+        for (var i = 0; i < response.data.length; i++) {
+            viewModel.columns()[0].cards.push(ko.mapping.fromJS(response.data[i]));
+        }
     });
 });
