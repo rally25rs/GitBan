@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
+using GitBan.Infrastructure;
 
 namespace GitBan.Controllers
 {
@@ -27,22 +29,29 @@ namespace GitBan.Controllers
         {
             var authCode = Request.Params["code"];
             if (string.IsNullOrEmpty(authCode))
+            {
+                Logger.LogDebugMessage("No code found.");
                 return View("Index");
+            }
 
             var data = GetPostContentsForGitHubAuth(authCode);
             var gitHubAuthResponse = GetAuthResponseFromGitHub(data);
             var accessToken = GetAccessTokenFromResponse(gitHubAuthResponse);
 
             if (string.IsNullOrEmpty(accessToken))
+            {
+                Logger.LogDebugMessage("No access token found.");
                 return View("Index");
+            }
 
             return View("Projects", new { AccessToken = accessToken });
         }
 
         private string GetAccessTokenFromResponse(HttpWebResponse response)
         {
-            var contests = GetResponseContents(response);
-            return ReadAccessTokenFromContents(contests);
+            var contents = GetResponseContents(response);
+            Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("GitHub response: " + contents));
+            return ReadAccessTokenFromContents(contents);
         }
 
         private static string GetResponseContents(HttpWebResponse response)
