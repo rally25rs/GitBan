@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
 using GitBan.Infrastructure;
 
@@ -12,8 +12,6 @@ namespace GitBan.Controllers
         private const string GITHUB_AUTH_URL = "https://github.com/login/oauth/access_token";
         private const string GITHUB_CLIENT_ID = "7ce4ceec9afd17668e3c";
         private const string GITHUB_SECRET = "2dcc4709333963e6d9086068ea0b84711ec03ab8";
-
-        private readonly Regex _authKeyRegex = new Regex("<access_token>(.*)</access_token>");
 
         public ActionResult Index()
         {
@@ -51,7 +49,16 @@ namespace GitBan.Controllers
         {
             var contents = GetResponseContents(response);
             Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("GitHub response: " + contents));
-            return ReadAccessTokenFromContents(contents);
+            try
+            {
+                var values = HttpUtility.ParseQueryString(contents);
+                return values["access_token"];
+            }
+            catch (Exception e)
+            {
+                Logger.LogException(e);
+                return null;
+            }
         }
 
         private static string GetResponseContents(HttpWebResponse response)
@@ -63,12 +70,6 @@ namespace GitBan.Controllers
             respStream.Read(contentBytes, 0, (int) response.ContentLength);
             respStream.Close();
             return Encoding.ASCII.GetString(contentBytes);
-        }
-
-        private string ReadAccessTokenFromContents(string contents)
-        {
-            var match = _authKeyRegex.Match(contents);
-            return match.Success ? match.Groups[1].Value : null;
         }
 
         private static byte[] GetPostContentsForGitHubAuth(string authCode)
