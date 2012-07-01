@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 using System.Net;
 using System.Text;
 using System.Web;
@@ -42,13 +43,15 @@ namespace GitBan.Controllers
                 return View("Index");
             }
 
-            return View("Projects", new { AccessToken = accessToken });
+            dynamic model = new ExpandoObject();
+            model.AccessToken = accessToken;
+            return View("Projects", model);
         }
 
         private string GetAccessTokenFromResponse(HttpWebResponse response)
         {
             var contents = GetResponseContents(response);
-            Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("GitHub response: " + contents));
+            Logger.LogDebugMessage("GitHub response: " + contents);
             try
             {
                 var values = HttpUtility.ParseQueryString(contents);
