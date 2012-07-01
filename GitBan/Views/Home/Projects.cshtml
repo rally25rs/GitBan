@@ -1,0 +1,13 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "GitBan : Projects";
+}
+
+Login worked and your access token is: @Model.AccessToken
+
+<h2>Select a GitHub Project to View:</h2>
+
+<ul data-bind="foreach: projects">
+    <li data-bind="text: name"></li>
+</ul>
