@@ -9,6 +9,12 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @if(User.Identity.IsAuthenticated && ViewBag.CurrentUser != null)
+    {
+        <header>
+            <div class="current-user"><img src="@ViewBag.CurrentUser.AvatarUrl" /><span>@ViewBag.CurrentUser.Name</span></div>
+        </header>      
+    }
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")

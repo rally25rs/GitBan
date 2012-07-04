@@ -53,6 +53,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -133,12 +134,33 @@
     <Compile Include="App_Start\ElmahMvc_Start.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\AuthenticatedController.cs" />
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DebugException.cs" />
+    <Compile Include="Infrastructure\GitHubAdapter.cs" />
+    <Compile Include="Infrastructure\IGitHubAdapter.cs" />
     <Compile Include="Infrastructure\Logger.cs" />
+    <Compile Include="Infrastructure\RequireHttpsAttribute.cs" />
+    <Compile Include="Infrastructure\WebClient.cs" />
+    <Compile Include="Migrations\201207040258594_InitialCreate.cs" />
+    <Compile Include="Migrations\201207040258594_InitialCreate.Designer.cs">
+      <DependentUpon>201207040258594_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207041610385_AddUserAvatarUrl.cs" />
+    <Compile Include="Migrations\201207041610385_AddUserAvatarUrl.Designer.cs">
+      <DependentUpon>201207041610385_AddUserAvatarUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\GitBanDataContext.cs" />
+    <Compile Include="Models\IGitBanDataContext.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,16 +248,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Board.cshtml" />
+    <Content Include="Views\Projects\Board.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Projects.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
