@@ -1,9 +1,15 @@
-﻿@{
+﻿@using System.Configuration
+@{
     ViewBag.Title = "GitBan : Virtual Kanban board for GitHub projects.";
 }
 
 @section scripts
 {
+    <script type="text/javascript">
+        function loginClicked() {
+            window.location.href = "https://github.com/login/oauth/authorize?client_id=@ConfigurationManager.AppSettings["GitHub_ClientId"]&scope=repo"; //TODO: make this change debug vs release based on settings.
+        }
+    </script>
     <script src="@Url.Content("/Scripts/index.js")" type="text/javascript"></script>
 }
 

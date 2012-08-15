@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web;
 using GitBan.Models;
 
@@ -10,14 +11,14 @@ namespace GitBan.Infrastructure
         private const string GITHUB_AUTH_URL = "https://github.com/login/oauth/access_token";
         private const string GITHUB_USER_INFO_URL = "https://api.github.com/user?access_token={0}";
         private const string GITHUB_USER_REPOS_URL = "https://api.github.com/user/repos?access_token={0}";
-        private const string GITHUB_CLIENT_ID = "7ce4ceec9afd17668e3c";
-        private const string GITHUB_SECRET = "2dcc4709333963e6d9086068ea0b84711ec03ab8";
+        private const string GITHUB_CLIENT_ID_SETTING = "GitHub_ClientId";
+        private const string GITHUB_SECRET_SETTING = "GitHub_Secret";
 
         public string GetAccessToken(string authCode)
         {
             var response = WebClient.Post(GITHUB_AUTH_URL, null, string.Format("client_id={0}&client_secret={1}&code={2}",
-                                 GITHUB_CLIENT_ID,
-                                 GITHUB_SECRET,
+                                 ConfigurationManager.AppSettings[GITHUB_CLIENT_ID_SETTING],
+                                 ConfigurationManager.AppSettings[GITHUB_SECRET_SETTING],
                                  authCode));
             try
             {

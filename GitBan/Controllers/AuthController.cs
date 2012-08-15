@@ -13,10 +13,10 @@ namespace GitBan.Controllers
         private readonly IGitBanDataContext _dataContext;
         private readonly IGitHubAdapter _gitHub;
 
-        public AuthController()
+        public AuthController(IGitHubAdapter gitHubAdapter, IGitBanDataContext dataContext)
         {
-            _dataContext = new GitBanDataContext();
-            _gitHub = new GitHubAdapter();
+            _dataContext = dataContext;
+            _gitHub = gitHubAdapter;
         }
 
         [AllowAnonymous]

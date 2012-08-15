@@ -1,15 +1,19 @@
 ﻿using System.Web.Mvc;
 using GitBan.Infrastructure;
+using GitBan.Models;
 
 namespace GitBan.Controllers
 {
-    public class ProjectsController : AuthenticatedController
+    public class ProjectsController : Controller, IAuthenticatedController
     {
         private readonly IGitHubAdapter _gitHub;
+        public User CurrentUser { get; set; }
+        public IGitBanDataContext CurrentDataContext { get; set; }
 
-        public ProjectsController()
+        public ProjectsController(IGitBanDataContext dataContext, IGitHubAdapter gitHubAdapter)
         {
-            _gitHub = new GitHubAdapter();
+            CurrentDataContext = dataContext;
+            _gitHub = gitHubAdapter;
         }
 
         public ActionResult Index()

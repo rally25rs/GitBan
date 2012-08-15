@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using GitBan.Models;
 
 namespace GitBan.Controllers
 {
-    public class BoardController : ApiController
+    public class BoardController : ApiController, IAuthenticatedController
     {
-        // GET api/board
-        public IEnumerable<string> Get()
+        public User CurrentUser { get; set; }
+        public IGitBanDataContext CurrentDataContext { get; set; }
+
+        public BoardController(IGitBanDataContext dataContext)
         {
-            return new string[] { "value1", "value2" };
+            CurrentDataContext = dataContext;
+        }
+
+        // GET api/board
+        public IEnumerable<string> Get() 
+        {
+            return new[] { "value1", "value2" };
         }
 
         // GET api/board/5

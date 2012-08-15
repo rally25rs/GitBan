@@ -44,6 +44,9 @@
       <HintPath>..\packages\Elmah.MVC.2.0.0\lib\net40\Elmah.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -134,8 +137,10 @@
     <Compile Include="App_Start\ElmahMvc_Start.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SetCurrentUserAttribute.cs" />
+    <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="Controllers\AuthController.cs" />
-    <Compile Include="Controllers\AuthenticatedController.cs" />
+    <Compile Include="Controllers\IAuthenticatedController.cs" />
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -143,6 +148,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\DebugException.cs" />
+    <Compile Include="Infrastructure\DependencyResolution\IoC.cs" />
+    <Compile Include="Infrastructure\DependencyResolution\SmDependencyResolver.cs" />
     <Compile Include="Infrastructure\GitHubAdapter.cs" />
     <Compile Include="Infrastructure\IGitHubAdapter.cs" />
     <Compile Include="Infrastructure\Logger.cs" />
@@ -156,9 +163,16 @@
     <Compile Include="Migrations\201207041610385_AddUserAvatarUrl.Designer.cs">
       <DependentUpon>201207041610385_AddUserAvatarUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201207172231530_BoardData.cs" />
+    <Compile Include="Migrations\201207172231530_BoardData.Designer.cs">
+      <DependentUpon>201207172231530_BoardData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\Column.cs" />
     <Compile Include="Models\GitBanDataContext.cs" />
     <Compile Include="Models\IGitBanDataContext.cs" />
+    <Compile Include="Models\Issue.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
